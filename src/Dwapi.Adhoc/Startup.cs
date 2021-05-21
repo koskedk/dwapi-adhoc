@@ -26,7 +26,7 @@ namespace Dwapi.Adhoc
         public IConfiguration Configuration { get; }
 
         private static string _authority,_authorityClient,_authorityClientCode;
-
+        public static  IServiceProvider Services;
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
@@ -91,8 +91,9 @@ namespace Dwapi.Adhoc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            Services = serviceProvider;
             var fordwardedHeaderOptions = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
@@ -126,8 +127,8 @@ namespace Dwapi.Adhoc
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             });
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

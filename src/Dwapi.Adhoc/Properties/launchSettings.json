@@ -3,7 +3,7 @@
     "Dwapi.Adhoc": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5600",
+      "applicationUrl": "https://localhost:5050",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

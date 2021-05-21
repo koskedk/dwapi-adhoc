@@ -17,9 +17,9 @@ namespace Dwapi.Adhoc
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.Console(LogEventLevel.Debug)
+                .WriteTo.Console(LogEventLevel.Information)
                 .WriteTo.File("logs/log.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 

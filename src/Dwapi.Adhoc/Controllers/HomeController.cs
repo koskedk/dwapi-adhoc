@@ -16,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Dwapi.Adhoc.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IAdhocManager _adhocManager;
@@ -47,8 +47,7 @@ namespace Dwapi.Adhoc.Controllers
 
         public IActionResult RefreshMeta()
         {
-            _adhocManager.RefreshMetadata(GetDatabasePath(), GetMetaDataPath());
-            // _adhocManager.RefreshMetadataHts(GetDatabasePathHts(), GetMetaDataPathHts());
+            _adhocManager.RefreshMetadata(GetDatabasePath(), GetMetaDataPath(), SourceDbType.MsSqL);
             return Ok(new {Status = "MetasRefreshed"});
         }
 

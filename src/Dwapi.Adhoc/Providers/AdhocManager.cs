@@ -2,6 +2,7 @@ using System;
 using System.Data.SqlClient;
 using ActiveQueryBuilder.Core;
 using ActiveQueryBuilder.Web.Server;
+using Dwapi.Adhoc.Models;
 using MySql.Data.MySqlClient;
 using Serilog;
 
@@ -9,49 +10,42 @@ namespace Dwapi.Adhoc.Providers
 {
     public class AdhocManager : IAdhocManager
     {
-        public void RefreshMetadata(string connectionString, string path)
+        public void RefreshMetadata(string connectionString, string path, SourceDbType dbType)
         {
-            var qb = new QueryBuilder()
-            {
-                SyntaxProvider = new MSSQLSyntaxProvider(),
-                BehaviorOptions = {AllowSleepMode = true},
-                MetadataLoadingOptions = {OfflineMode = true},
-                MetadataProvider = new MSSQLMetadataProvider() {Connection = new SqlConnection(connectionString)}
-            };
-
+            var qb = new QueryBuilder();
+            qb.BehaviorOptions.AllowSleepMode = true;
+            qb.MetadataLoadingOptions.OfflineMode = true;
+            SetupDbProvider(qb,connectionString,dbType);
+            
             try
             {
+               // qb.MetadataContainer.AddDatabase("portaldev");
+                var server= qb.MetadataContainer.AddServer("MYSQL_SERVER");
+                MetadataItem database = server.AddDatabase("portaldev");
+                
                 qb.MetadataContainer.LoadAll(true);
                 qb.MetadataStructure.Refresh();
                 qb.MetadataContainer.ExportToXML(path);
             }
             catch (Exception e)
             {
-                Log.Error($"Refersh metadata error {connectionString}", e);
+                Log.Error($"Refresh metadata error {connectionString}", e);
                 throw;
             }
         }
 
-        public void RefreshMetadataHts(string connectionString, string path)
+        private void SetupDbProvider(QueryBuilder qb,string connectionString, SourceDbType dbType)
         {
-            var qb = new QueryBuilder()
+            if (dbType == SourceDbType.MsSqL)
             {
-                SyntaxProvider = new MySQLSyntaxProvider(),
-                BehaviorOptions = { AllowSleepMode = true },
-                MetadataLoadingOptions = { OfflineMode = true },
-                MetadataProvider = new MySQLMetadataProvider() { Connection = new MySqlConnection(connectionString) }
-            };
-
-            try
-            {
-                qb.MetadataContainer.LoadAll(true);
-                qb.MetadataStructure.Refresh();
-                qb.MetadataContainer.ExportToXML(path);
+                qb.SyntaxProvider = new MSSQLSyntaxProvider();
+                qb.MetadataProvider = new MSSQLMetadataProvider() {Connection = new SqlConnection(connectionString)};
             }
-            catch (Exception e)
+            
+            if (dbType == SourceDbType.MySqL)
             {
-                Log.Error($"Refersh metadata error {connectionString}", e);
-                throw;
+                qb.SyntaxProvider = new MySQLSyntaxProvider();
+                qb.MetadataProvider = new MySQLMetadataProvider() {Connection = new MySqlConnection(connectionString)};
             }
         }
     }

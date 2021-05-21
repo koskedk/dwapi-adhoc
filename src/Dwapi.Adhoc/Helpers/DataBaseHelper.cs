@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using Dwapi.Adhoc.Controllers;
+using MySql.Data.MySqlClient;
 
 namespace Dwapi.Adhoc.Helpers
 {
@@ -92,6 +93,11 @@ namespace Dwapi.Adhoc.Helpers
         public static IDbConnection CreateMsSqlConnection(string connectionString)
         {
             return new SqlConnection(connectionString);
+        }
+        
+        public static IDbConnection CreateMySqlConnection(string connectionString)
+        {
+            return new MySqlConnection(connectionString);
         }
     }
 }

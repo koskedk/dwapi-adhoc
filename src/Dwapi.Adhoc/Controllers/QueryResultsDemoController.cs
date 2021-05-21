@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Dwapi.Adhoc.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class QueryResultsDemoController : Controller
     {
         private string _instanceId = "QueryResults";

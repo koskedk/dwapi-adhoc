@@ -1,5 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://www.activequerybuilder.com/schemas/metadata2.xsd" loaded_types="All">
+	<server name="MYSQL_SERVER" loaded_types="All">
+		<database name="portaldev" loaded_types="All">
+			<schema name="" loaded_types="All">
+				<table name="dim_docket" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="dim_emr" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="dim_facility" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="dim_time" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="dimagegroups" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="dimdate" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_agegender" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_clientselftested" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_clienttestedas" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_entrypoint" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_monthslasttest" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_populationtype" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_tbscreening" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_hts_teststrategy" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_htsuptake" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_manifest" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_pns_children" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_pns_knowledgehivstatus" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_pns_sexualpartner" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="fact_trans_hts" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="querybuilders" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="querytransformers" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="stg_hts_client_screening" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<table name="validate_hts_trans" loaded_types="All" referencing_foreignkeys_loaded="True" />
+				<view name="expected_uploads" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_agegender" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_clientselftested" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_clienttestedas" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_entrypoint" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_monthsincelasttest" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_populationtype" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_tbscreening" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="hts_teststrategy" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="htsuptake" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="recency_uploads" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+				<view name="recency_uploads_befupdate" loaded_types="All" referencing_foreignkeys_loaded="True">
+					<description>VIEW</description>
+				</view>
+			</schema>
+		</database>
+	</server>
 	<database name="PortalDev" default="True" loaded_types="All">
 		<schema name="dbo" default="True" loaded_types="All">
 			<table name="FACT_Trans_Newly_Started" loaded_types="All" referencing_foreignkeys_loaded="True">
