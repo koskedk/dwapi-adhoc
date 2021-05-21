@@ -25,7 +25,7 @@ namespace Dwapi.Adhoc
         public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
-        private static string _authority,_authorityClient,_authorityClientCode;
+        private static string _authority, _authorityClient, _authorityClientCode, _redirectUri;
         public static  IServiceProvider Services;
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
@@ -46,6 +46,7 @@ namespace Dwapi.Adhoc
             _authority = Configuration.GetSection("Authority").Value;
             _authorityClient= Configuration.GetSection("AuthorityClientId").Value;
             _authorityClientCode= Configuration.GetSection("AuthorityClientCode").Value;
+            _redirectUri= Configuration.GetSection("RedirectUri").Value;
 
             services.AddAuthentication(opt =>
                 {
@@ -61,6 +62,12 @@ namespace Dwapi.Adhoc
                     opt.ResponseType = "code id_token";
                     opt.SaveTokens = true;
                     opt.ClientSecret = _authorityClientCode;
+                    if(!string.IsNullOrWhiteSpace(_redirectUri))
+                        opt.Events.OnRedirectToIdentityProvider = context =>
+                        {
+                            context.ProtocolMessage.RedirectUri = _redirectUri;
+                            return Task.CompletedTask;
+                        };
                 });
 
 

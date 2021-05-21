@@ -32,9 +32,8 @@ namespace Dwapi.Adhoc.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Index(string token)
+        public IActionResult Index()
         {
-            string name = token;
             return RedirectToAction("Index", "QueryResultsDemo");
             return View();
         }
@@ -47,7 +46,7 @@ namespace Dwapi.Adhoc.Controllers
 
         public IActionResult RefreshMeta()
         {
-            _adhocManager.RefreshMetadata(GetDatabasePath(), GetMetaDataPath(), SourceDbType.MsSqL);
+            _adhocManager.RefreshMetadata(GetDatabasePath(), GetMetaDataPath());
             return Ok(new {Status = "MetasRefreshed"});
         }
 
@@ -61,20 +60,10 @@ namespace Dwapi.Adhoc.Controllers
             var con = _configuration.GetConnectionString("SourceConnection");
             return con;
         }
-        private string GetDatabasePathHts()
-        {
-            var con = _configuration.GetConnectionString("HtsSourceConnection");
-            return con;
-        }
 
         private string GetMetaDataPath()
         {
             var con = Path.Combine(_env.ContentRootPath,_configuration["XMLMetadata"]);
-            return con;
-        }
-        private string GetMetaDataPathHts()
-        {
-            var con = Path.Combine(_env.ContentRootPath, _configuration["XMLMetadata"].Replace("/portaldev.xml", "/portaldevhts.xml"));
             return con;
         }
     }
