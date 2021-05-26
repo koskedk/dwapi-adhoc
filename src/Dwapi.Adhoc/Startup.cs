@@ -57,17 +57,22 @@ namespace Dwapi.Adhoc
                 .AddOpenIdConnect("oidc", opt =>
                 {
                     opt.SignInScheme = "Cookies";
+                    opt.NonceCookie.SameSite = SameSiteMode.Unspecified;
+                    opt.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
                     opt.Authority = _authority;
                     opt.ClientId = _authorityClient;
                     opt.ResponseType = "code id_token";
                     opt.SaveTokens = true;
                     opt.ClientSecret = _authorityClientCode;
-                    if(!string.IsNullOrWhiteSpace(_redirectUri))
-                        opt.Events.OnRedirectToIdentityProvider = context =>
+                    if (!string.IsNullOrWhiteSpace(_redirectUri))
+                    {
+                        var redirectToIdpHandler = opt.Events.OnRedirectToIdentityProvider;
+                        opt.Events.OnRedirectToIdentityProvider = async context =>
                         {
+                            await redirectToIdpHandler(context);
                             context.ProtocolMessage.RedirectUri = _redirectUri;
-                            return Task.CompletedTask;
                         };
+                    }
                 });
 
 
