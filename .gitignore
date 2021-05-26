@@ -341,4 +341,5 @@ healthchecksdb
 /src/Dwapi.Adhoc/logs/
 .DS_Store
 /src/Dwapi.Adhoc/appsettings.Development.json
-/src/Dwapi.Adhoc/metas/
+/src/Dwapi.Adhoc/metas/portaldev.xml
+

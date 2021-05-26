@@ -322,7 +322,6 @@
 
   <ItemGroup>
     <Folder Include="logs" />
-    <Folder Include="metas" />
   </ItemGroup>
 
 </Project>
