@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /src/Dwapi.Adhoc/logs/
 .DS_Store
+/src/Dwapi.Adhoc/appsettings.Development.json
